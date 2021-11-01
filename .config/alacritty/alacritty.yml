@@ -77,7 +77,7 @@
   #
   # Values for `startup_mode` (macOS only):
   #   - SimpleFullscreen
-  startup_mode: Fullscreen
+  startup_mode: Maximized
 
   # Window title
   #title: Alacritty
@@ -216,116 +216,68 @@
   #  text: CellBackground
   #  cursor: CellForeground
 
-  #schemes:
-  #gruvbox: &gruvbox
-    #primary:
-      #background: '0x000000'
-    #normal:
-      #black:   '0x282828'
-      #red:     '0xcc241d'
-      #green:   '0x98971a'
-      #yellow:  '0xd79921'
-      #blue:    '0x458588'
-      #magenta: '0xb16286'
-      #cyan:    '0x689d6a'
-      #white:   '0xa89984'
-    #bright:
-      #black:   '0x928374'
-      #red:     '0xfb4934'
-      #green:   '0xb8bb26'
-      #yellow:  '0xfabd2f'
-      #blue:    '0x83a598'
-      #magenta: '0xd3869b'
-      #cyan:    '0x8ec07c'
-      #white:   '0xebdbb2'
-  #xterm: &xterm
-    #normal:
-      #black:   '#000000'
-      #red:     '#cd0000'
-      #green:   '#00cd00'
-      #yellow:  '#cdcd00'
-      #blue:    '#0000ee'
-      #magenta: '#cd00cd'
-      #cyan:    '#00cdcd'
-      #white:   '#e5e5e5'
-    #bright:
-      #black:   '#7f7f7f'
-      #red:     '#ff0000'
-      #green:   '#00ff00'
-      #yellow:  '#ffff00'
-      #blue:    '#5c5cff'
-      #magenta: '#ff00ff'
-      #cyan:    '#00ffff'
-      #white:   '#ffffff'
+  schemes:
+  gruvbox: &gruvbox
+    primary:
+      background: '0x000000'
+    normal:
+      black:   '0x282828'
+      red:     '0xcc241d'
+      green:   '0x98971a'
+      yellow:  '0xd79921'
+      blue:    '0x458588'
+      magenta: '0xb16286'
+      cyan:    '0x689d6a'
+      white:   '0xa89984'
+    bright:
+      black:   '0x928374'
+      red:     '0xfb4934'
+      green:   '0xb8bb26'
+      yellow:  '0xfabd2f'
+      blue:    '0x83a598'
+      magenta: '0xd3869b'
+      cyan:    '0x8ec07c'
+      white:   '0xebdbb2'
+  xterm: &xterm
+    normal:
+      black:   '#000000'
+      red:     '#cd0000'
+      green:   '#00cd00'
+      yellow:  '#cdcd00'
+      blue:    '#0000ee'
+      magenta: '#cd00cd'
+      cyan:    '#00cdcd'
+      white:   '#e5e5e5'
+    bright:
+      black:   '#7f7f7f'
+      red:     '#ff0000'
+      green:   '#00ff00'
+      yellow:  '#ffff00'
+      blue:    '#5c5cff'
+      magenta: '#ff00ff'
+      cyan:    '#00ffff'
+      white:   '#ffffff'
 
- #colors: *gruvbox
+ colors: *gruvbox
 
- colors:
-  primary:
-    background: '#2e3440'
-    foreground: '#d8dee9'
-    dim_foreground: '#a5abb6'
-  cursor:
-    text: '#2e3440'
-    cursor: '#d8dee9'
-  vi_mode_cursor:
-    text: '#2e3440'
-    cursor: '#d8dee9'
-  selection:
-    text: CellForeground
-    background: '#4c566a'
-  search:
-    matches:
-      foreground: CellBackground
-      background: '#88c0d0'
-    bar:
-      background: '#434c5e'
-      foreground: '#d8dee9'
-  normal:
-    black: '#3b4252'
-    red: '#bf616a'
-    green: '#a3be8c'
-    yellow: '#ebcb8b'
-    blue: '#81a1c1'
-    magenta: '#b48ead'
-    cyan: '#88c0d0'
-    white: '#e5e9f0'
-  bright:
-    black: '#4c566a'
-    red: '#bf616a'
-    green: '#a3be8c'
-    yellow: '#ebcb8b'
-    blue: '#81a1c1'
-    magenta: '#b48ead'
-    cyan: '#8fbcbb'
-    white: '#eceff4'
-  dim:
-    black: '#373e4d'
-    red: '#94545d'
-    green: '#809575'
-    yellow: '#b29e75'
-    blue: '#68809a'
-    magenta: '#8c738c'
-    cyan: '#6d96a5'
-    white: '#aeb3bb'
 
 
   # Search colors
   #
   # Colors used for the search bar and match highlighting.
-  #search:
+ search:
     # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
-    #matches:
-    #  foreground: '#000000'
-    #  background: '#ffffff'
-    #focused_match:
-    #  foreground: '#ffffff'
-    #  background: '#000000'
+    matches:
+      foreground: '#000000'
+      background: '#ffffff'
+    focused_match:
+      foreground: '#ffffff'
+      background: '#000000'
 
-    #bar:
-    #  background: '#c5c8c6'
-    #  foreground: '#1d1f21'
+    bar:
+      background: '#c5c8c6'
+      foreground: '#1d1f21'
 
   # Keyboard regex hints
   #hints:
@@ -334,16 +286,16 @@
     # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
     #start:
-    #  foreground: '#1d1f21'
-    #  background: '#e9ff5e'
+      #foreground: '#1d1f21'
+      #background: '#e9ff5e'
 
     # All characters after the first one in the hint label
     #
     # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
     #end:
-    #  foreground: '#e9ff5e'
-    #  background: '#1d1f21'
+      #foreground: '#e9ff5e'
+      #background: '#1d1f21'
 
   # Line indicator
   #
@@ -451,7 +403,7 @@
   # Window opacity as a floating point number from `0.0` to `1.0`.
   # The value `0.0` is completely transparent and `1.0` is opaque.
   #opacity: 0.81
- background_opacity: 0.91
+ background_opacity: 0.81
 
   # Bell Command
   #

@@ -1,0 +1,361 @@
+###########
+# general #
+###########
+
+# font used by i3 for titles and bars
+font pango:Hack 8, Fontawesome free 10
+
+#wallpaper and lock
+bindsym $mod+Delete exec i3lock -i ~/.wallpaper.png
+bindsym Print exec scrot 'Cheese_%a-%d%b%y_%H.%M.png' -e 'viewnior ~/$f'
+
+# Hide the mouse after some time 
+# exec --no-startup-id unclutter
+
+# launch scripts
+#exec --no-startup-id /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
+
+
+# launch dunst
+exec --no-startup-id dunst
+
+# dunst keyboard shortcuts
+bindsym Ctrl+Shift+x exec dunstctl close-all
+bindsym Ctrl+x exec dunstctl close
+bindsym Ctrl+BackSpace exec dunstctl history-pop
+
+# launch brave
+#exec --no-startup-id chromium
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# i3 config file (v4)
+
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+# set the modifier (Mod4: cmd)
+# To see a complete list, run xmodmap
+set $mod Mod4
+set $mod1 Mod1
+# Hide the bar
+#bindsym $mod+h bar mode toggle
+
+# Mouse doesn't jump from one screen to another
+mouse_warping none
+
+bindsym $mod+u border none
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Terminal
+bindsym $mod+Return exec alacritty
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+exec --no-startup-id nitrogen --restore
+exec --no-startup-id xsettingsd &
+exec_always --no-startup-id numlockx on
+exec --no-startup-id picom -CGb
+
+#dmenu
+bindsym $mod+Shift+d exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'Noto Sans:size=8'"
+bindsym $mod+d exec rofi -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font 'Noto Sans 8'
+
+
+
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+Ctrl+h move workspace to output left
+bindsym $mod+Ctrl+l move workspace to output right
+
+bindsym $mod+Ctrl+j workspace next
+bindsym $mod+Ctrl+k workspace prev
+
+## Splits
+## Mod1 is the Alt key (run xmodmap to see a complete list)
+
+# split in horizontal orientation
+bindsym $mod+Mod1+v split v
+
+# split in vertical orientation
+bindsym $mod+Mod1+h split h
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# Size of floating windows
+floating_minimum_size 400 x 300
+floating_maximum_size 1080 x 540
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+p focus parent
+
+# focus the child container
+bindsym $mod+c focus child
+
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec pactl pause
+bindsym XF86AudioNext exec --no-startup-id pactl set-next next
+bindsym XF86AudioPrev exec playerctl previous
+
+# no focus following the mouse
+focus_follows_mouse no
+
+# using the same workspace shortcut will focus on your last 
+workspace_auto_back_and_forth yes
+
+# workspace layout by default for all workspaces
+workspace_layout tabbed
+
+#############
+# workspace #
+#############
+set $home "1:"
+set $terms "2:"
+set $web "3:"
+set $ide "4:"
+set $design "5:"
+set $office "6:"
+set $knowledge "7:"
+set $vm "8:"
+set $music "9:"
+set $mail "10:"
+
+# switch to workspace
+bindsym $mod+1 workspace $home
+bindsym $mod+2 workspace $terms
+bindsym $mod+3 workspace $web
+bindsym $mod+4 workspace $ide
+bindsym $mod+5 workspace $design
+bindsym $mod+6 workspace $office
+bindsym $mod+7 workspace $knowledge
+bindsym $mod+8 workspace $vm
+bindsym $mod+9 workspace $music
+bindsym $mod+0 workspace $mail
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $home
+bindsym $mod+Shift+2 move container to workspace $terms
+bindsym $mod+Shift+3 move container to workspace $web
+bindsym $mod+Shift+4 move container to workspace $ide
+bindsym $mod+Shift+5 move container to workspace $design
+bindsym $mod+Shift+6 move container to workspace $office
+bindsym $mod+Shift+7 move container to workspace $knowledge
+bindsym $mod+Shift+8 move container to workspace $vm
+bindsym $mod+Shift+9 move container to workspace $music
+bindsym $mod+Shift+0 move container to workspace $mail
+
+# bind software to workspace
+# can use xprop - WM_CLASS(STRING) = "urxvt", "URxvt"
+assign [class="firefox" instance="Navigator"] → $web
+assign [class="Brave-browser" instance="brave-browser"] → $web
+assign [class="Min" instance="min"] → $web
+assign [class="Chromium" instance="chromium"] → $web
+assign [class="Slack" instance="slack"] → $web
+
+assign [class="mpv" instance="gl"] → $multimedia
+assign [class="Easytag" instance="easytag"] → $multimedia
+assign [class="Steam" instance="Steam"] → $multimedia
+assign [class="Lutris" instance="lutris"] → $multimedia
+assign [class="Deadbeef" instance="deadbeef"] → $multimedia
+
+assign [class="Thunderbird" instance="Mail"] → $office
+assign [class="Thunderbird" instance="Msgcompose"] → $office
+
+assign [instance="nomacs"] → $design
+assign [class="digikam" instance="digikam"] → $design
+assign [class="Darktable" instance="darktable"] → $design
+assign [class="Gimp" instance="gimp"] → $design
+assign [class="scribus" instance="scribus"] → $design
+assign [class="Inkscape" instance="org.inkscape.Inkscape"] → $design
+
+assign [class="Doublecmd" instance="doublecmd"] → $office
+assign [class="Joplin" instance="joplin"] → $office
+assign [class="calibre" instance="calibre-gui"] → $office
+
+assign [instance="FreeMind"] → $knowledge
+assign [instance="libreoffice-calc"] → $knowledge
+
+assign [class="VirtualBox Manager" instance="virtualBox Manager"] → $vm
+assign [class="VirtualBox Machine" instance="virtualBox Machine"] → $vm
+
+####################
+# restart / reload #
+####################
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+F12 exec i3-msg exit
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# floating pop up automatically
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [class="zoom"] floating enable
+
+# floating windows
+for_window [class="KeePassXC"] floating enable
+for_window [class="Arandr"] floating enable
+for_window [class="Gcolor2"] floating enable
+for_window [instance="gnome-alsamixer" class="Gnome-alsamixer"] floating enable
+for_window [instance="Dolphin" class="Dolphin"] floating enable
+
+
+# configuration of some software
+for_window [class="Alacritty"] border pixel 5
+
+# start softwares and command lines in workspaces
+#exec --no-startup-id i3-msg workspace "$terms"; exec /usr/bin/urxvtc
+#exec --no-startup-id i3-msg workspace "$office"; exec joplin-desktop
+
+##########
+# DESIGN #
+##########
+
+# set primary gruvbox colorscheme colors
+set $bg #282828
+set $red #cc241d
+set $green #98971a
+set $yellow #d79921
+set $blue #458588
+set $purple #b16286
+set $aqua #689d68
+set $gray #a89984
+set $darkgray #1d2021
+
+
+
+# hide borders
+#hide_edge_borders both
+# green gruvbox
+# class                 border|backgr|text|indicator|child_border
+#client.focused          $green $green $darkgray $purple $darkgray
+#client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
+#client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
+#client.urgent           $red $red $white $red $red
+
+# blue gruvbox
+# class                 border|backgr|text|indicator|child_border
+client.focused          $blue $blue $darkgray $purple $darkgray
+client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
+client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
+client.urgent           $red $red $white $red $red
+client.placeholder      $darkgray #2e2e2e #fffffd #000000   #0c0c0c
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+        status_command i3status
+        colors {
+        background #2f343f
+        statusline #2f343f
+        separator #4b5262
+
+        # colour of border, background, and text
+        focused_workspace       #2f343f #bf616a #d8dee8
+        active_workspace        #2f343f #2f343f #d8dee8
+        inactive_workspace      #2f343f #2f343f #d8dee8
+        urgent_workspacei       #2f343f #ebcb8b #2f343f
+    }
+        mode hide
+        position bottom
+        tray_output primary
+        font pango:DejaVu Sans Mono 8
+        strip_workspace_numbers yes
+}
+#########################################
+##### shutdown / restart / suspend...####
+#########################################
+set $mode_system \
+System (l) lock, (e) logout, (s) suspend, \
+(h) hibernate, (r) reboot, (Ctrl+s) shutdown
+set $Locker i3lock -i ~/.wallpaper.png
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, \
+    mode "default"
+    bindsym h exec --no-startup-id $Locker && systemctl hibernate, \
+    mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Ctrl+s exec --no-startup-id systemctl poweroff -i, \
+    mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+End mode "$mode_system"
+
+#bindsym $mod+Ctrl+f fullscreen toggle global

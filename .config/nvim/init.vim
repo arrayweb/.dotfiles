@@ -20,6 +20,7 @@ Plug 'nightsense/forgotten'
 Plug 'zaki/zazen'
 
 Plug 'arcticicestudio/nord-vim'
+Plug 'sainnhe/gruvbox-material'
 
 " Aethetics - Additional
 Plug 'nightsense/nemo'
@@ -102,7 +103,7 @@ augroup END
 
 " Main Coloring Configurations
 syntax on
-color nord
+color gruvbox-material
 
 " Enable True Color Support (ensure you're using a 256-color enabled $TERM, e.g. xterm-256color)
 set termguicolors
