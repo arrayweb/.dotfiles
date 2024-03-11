@@ -67,7 +67,7 @@ keys = [
     #Key([mod], "Return", lazy.spawn(myTerm), desc="Terminal"),
     #Key([mod, "shift"], "Return", lazy.spawn("rofi -show drun"), desc='Run Launcher'),
     Key([mod], "b", lazy.spawn(myBrowser), desc='Web browser'),
-    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([mod], "Space", lazy.next_layout(), desc="Toggle between layouts"),
     #Key([mod, "shift"], "c", lazy.window.kill(), desc="Kill focused window"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "shift"], "q", lazy.window.kill(), desc="Kill focused window"),
@@ -83,8 +83,7 @@ keys = [
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
-
+    ## Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
     Key([mod, "shift"], "h",
@@ -112,10 +111,10 @@ keys = [
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
-    Key([mod, "shift"], "space", lazy.layout.toggle_split(), desc="Toggle between split and unsplit sides of stack"),
+    ## Key([mod, "shift"], "space", lazy.layout.toggle_split(), desc="Toggle between split and unsplit sides of stack"),
 
     # Treetab prompt
-    Key([mod, "shift"], "a", add_treetab_section, desc='Prompt to add new section in treetab'),
+    ## Key([mod, "shift"], "a", add_treetab_section, desc='Prompt to add new section in treetab'),
 
     # Grow/shrink windows left/right. 
     # This is mainly for the 'monadtall' and 'monadwide' layouts
@@ -148,20 +147,21 @@ keys = [
     Key([mod], "comma", lazy.prev_screen(), desc='Move focus to prev monitor'),
     
     # Emacs programs launched using the key chord CTRL+e followed by 'key'
-    KeyChord([mod],"e", [
-        Key([], "e", lazy.spawn(myEmacs), desc='Emacs Dashboard'),
-        Key([], "a", lazy.spawn(myEmacs + "--eval '(emms-play-directory-tree \"~/Music/\")'"), desc='Emacs EMMS'),
-        Key([], "b", lazy.spawn(myEmacs + "--eval '(ibuffer)'"), desc='Emacs Ibuffer'),
-        Key([], "d", lazy.spawn(myEmacs + "--eval '(dired nil)'"), desc='Emacs Dired'),
-        Key([], "i", lazy.spawn(myEmacs + "--eval '(erc)'"), desc='Emacs ERC'),
-        Key([], "s", lazy.spawn(myEmacs + "--eval '(eshell)'"), desc='Emacs Eshell'),
-        Key([], "v", lazy.spawn(myEmacs + "--eval '(vterm)'"), desc='Emacs Vterm'),
-        Key([], "w", lazy.spawn(myEmacs + "--eval '(eww \"distro.tube\")'"), desc='Emacs EWW'),
-        Key([], "F4", lazy.spawn("killall emacs"),
-                      lazy.spawn("/usr/bin/emacs --daemon"),
-                      desc='Kill/restart the Emacs daemon')
-    ]),
+    #KeyChord([mod],"e", [
+    #   Key([], "e", lazy.spawn(myEmacs), desc='Emacs Dashboard'), 
+    #  Key([], "a", lazy.spawn(myEmacs + "--eval '(emms-play-directory-tree \"~/Music/\")'"), desc='Emacs EMMS'),
+    # Key([], "b", lazy.spawn(myEmacs + "--eval '(ibuffer)'"), desc='Emacs Ibuffer'),
+    #Key([], "d", lazy.spawn(myEmacs + "--eval '(dired nil)'"), desc='Emacs Dired'),
+    #    Key([], "i", lazy.spawn(myEmacs + "--eval '(erc)'"), desc='Emacs ERC'),
+    #    Key([], "s", lazy.spawn(myEmacs + "--eval '(eshell)'"), desc='Emacs Eshell'),
+    #    Key([], "v", lazy.spawn(myEmacs + "--eval '(vterm)'"), desc='Emacs Vterm'),
+    #    Key([], "w", lazy.spawn(myEmacs + "--eval '(eww \"distro.tube\")'"), desc='Emacs EWW'),
+    #    Key([], "F4", lazy.spawn("killall emacs"),
+    #                 lazy.spawn("/usr/bin/emacs --daemon"),
+    #                 desc='Kill/restart the Emacs daemon')
+    # ]),
     # Dmenu/rofi scripts launched using the key chord SUPER+p followed by 'key'
+    
     KeyChord([mod], "p", [
         Key([], "h", lazy.spawn("dm-hub -r"), desc='List all dmscripts'),
         Key([], "a", lazy.spawn("dm-sounds -r"), desc='Choose ambient sound'),
@@ -184,9 +184,9 @@ keys = [
 groups = []
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
 
-group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
+#group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
 #group_labels = ["DEV", "WWW", "SYS", "DOC", "VBOX", "CHAT", "MUS", "VID", "GFX",]
-#group_labels = ["", "", "", "", "", "", "", "", "",]
+group_labels = ["", "", "", "", "", "", "", "", "",]
 
 group_layouts = ["monadtall", "monadtall", "tile", "tile", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall"]
 
@@ -215,6 +215,12 @@ for i in groups:
                 lazy.window.togroup(i.name, switch_group=False),
                 desc="Move focused window to group {}".format(i.name),
             ),
+            #CHANGE WORKSPACES
+            #Key([mod], i.name, lazy.group[i.name].toscreen()),
+            Key([mod], "Tab", lazy.screen.next_group(True)),
+            #Key([mod, "shift" ], "Tab", lazy.screen.prev_group()),
+            #Key(["mod1"], "Tab", lazy.screen.next_group()),
+            #RRKey(["mod1", "shift"], "Tab", lazy.screen.prev_group()),
         ]
     )
 
@@ -336,19 +342,19 @@ def init_widgets_list():
                  foreground = colors[6],
                  max_chars = 40
                  ),
-        widget.GenPollText(
-                 update_interval = 300,
-                 func = lambda: subprocess.check_output("printf $(uname -r)", shell=True, text=True),
-                 foreground = colors[3],
-                 fmt = '❤  {}',
-                 decorations=[
-                     BorderDecoration(
-                         colour = colors[3],
-                         border_width = [0, 0, 2, 0],
-                     )
-                 ],
-                 ),
-        widget.Spacer(length = 8),
+        # widget.GenPollText(
+        #          update_interval = 300,
+        #          func = lambda: subprocess.check_output("printf $(uname -r)", shell=True, text=True),
+        #          foreground = colors[3],
+        #          fmt = '❤  {}',
+        #          decorations=[
+        #              BorderDecoration(
+        #                  colour = colors[3],
+        #                  border_width = [0, 0, 2, 0],
+        #              )
+        #          ],
+        #          ),
+        # widget.Spacer(length = 8),
         widget.CPU(
                  format = '▓  Cpu: {load_percent}%',
                  foreground = colors[4],
@@ -373,22 +379,22 @@ def init_widgets_list():
                  ],
                  ),
         widget.Spacer(length = 8),
-        widget.DF(
-                 update_interval = 60,
-                 foreground = colors[5],
-                 mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e df')},
-                 partition = '/',
-                 #format = '[{p}] {uf}{m} ({r:.0f}%)',
-                 format = '{uf}{m} free',
-                 fmt = '🖴  Disk: {}',
-                 visible_on_warn = False,
-                 decorations=[
-                     BorderDecoration(
-                         colour = colors[5],
-                         border_width = [0, 0, 2, 0],
-                     )
-                 ],
-                 ),
+        # widget.DF(
+        #          update_interval = 60,
+        #          foreground = colors[5],
+        #          mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e df')},
+        #          partition = '/',
+        #          #format = '[{p}] {uf}{m} ({r:.0f}%)',
+        #          format = '{uf}{m} free',
+        #          fmt = '🖴  Disk: {}',
+        #          visible_on_warn = False,
+        #          decorations=[
+        #              BorderDecoration(
+        #                  colour = colors[5],
+        #                  border_width = [0, 0, 2, 0],
+        #              )
+        #          ],
+        #          ),
         widget.Spacer(length = 8),
         widget.Volume(
                  foreground = colors[7],
@@ -401,16 +407,16 @@ def init_widgets_list():
                  ],
                  ),
         widget.Spacer(length = 8),
-        widget.KeyboardLayout(
-                 foreground = colors[4],
-                 fmt = '⌨  Kbd: {}',
-                 decorations=[
-                     BorderDecoration(
-                         colour = colors[4],
-                         border_width = [0, 0, 2, 0],
-                     )
-                 ],
-                 ),
+        # widget.KeyboardLayout(
+        #          foreground = colors[4],
+        #          fmt = '⌨  Kbd: {}',
+        #          decorations=[
+        #              BorderDecoration(
+        #                  colour = colors[4],
+        #                  border_width = [0, 0, 2, 0],
+        #              )
+        #          ],
+        #          ),R
         widget.Spacer(length = 8),
         widget.Clock(
                  foreground = colors[8],
