@@ -416,8 +416,30 @@ def init_widgets_list():
         #                  border_width = [0, 0, 2, 0],
         #              )
         #          ],
-        #          ),R
+        #          ),]
         widget.Spacer(length = 8),
+        #widget.BatteryIcon(scale =0.9),
+        widget.Battery(
+            update_interval = 60,
+            charge_char = ' ',
+            discharge_char = ' ',
+            empty_char =' ', 
+            format = '{char} {percent:2.0%}  {hour:d}:{min:02d}',
+            #hide_threshold = 0.9,
+            low_background = 'ffaabb',
+            low_percentage = 0.21,
+            notify_below = 0.2,
+            foreground = colors[4],
+            decorations=[
+            BorderDecoration(
+            colour = colors[4],
+            border_width = [0, 0, 2, 0],
+            )
+            ]
+             ),
+        widget.Spacer(length = 8),
+        widget.Spacer(length = 8),
+
         widget.Clock(
                  foreground = colors[8],
                  format = "⏱  %a, %b %d - %H:%M",
